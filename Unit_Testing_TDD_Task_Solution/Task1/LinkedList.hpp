@@ -14,9 +14,10 @@ public:
 	{
 		// to implement
 	}
-	void pushFront(const T& newValue)
+	void pushFront(const T& element)
 	{
-		// to implement
+		Node* temp = head;
+		head = new Node(element);
 	}
 	void pushBack(const T& newValue)
 	{
@@ -57,9 +58,11 @@ public:
 private:
 	struct Node
 	{
-		Node(const T& newValue) : value{ newValue } {}
-		Node* next = nullptr;
 		T value;
+		Node* next = nullptr;
+
+		Node(const T& value)
+		: value{value} {}
 	};
 
 	Node* head;
