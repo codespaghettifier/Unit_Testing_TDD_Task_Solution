@@ -15,8 +15,12 @@ TEST(LinkedList, pushBack)
     LinkedList<int> list;
     list.pushBack(42);
     list.pushBack(43);
+    list.pushBack(44);
+    list.pushBack(45);
     ASSERT_TRUE(list[0] == 42);
     ASSERT_TRUE(list[1] == 43);
+    ASSERT_TRUE(list[2] == 44);
+    ASSERT_TRUE(list[3] == 45);
 }
 
 TEST(LinkedList, LinkedListInitializerList)

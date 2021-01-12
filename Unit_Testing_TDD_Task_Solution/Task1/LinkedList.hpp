@@ -2,6 +2,8 @@
 
 #include <initializer_list>
 
+#include <iostream>
+
 template<typename T>
 class LinkedList
 {
@@ -9,60 +11,82 @@ public:
 	LinkedList() = default;
 	LinkedList(const std::initializer_list<T>& elements)
 	{
-
+		auto iterator = elements.begin();
+		while(iterator != elements.end())
+		{
+			pushBack(*iterator);
+			iterator++;
+		}
 	}
+
 	void pushFront(const T& element)
 	{
 		Node* temp = head;
 		head = new Node(element);
 		head->next = temp;
+		size++;
 	}
 	void pushBack(const T& element)
 	{
 		if(head == nullptr)
 		{
 			head = new Node(element);
+			size++;
 			return;
 		}
 
-		Node* next = head;
-		while(next->next != nullptr)
+		getNode(size - 1).next = new Node(element);
+		size++;
+	}
+	void popFront()
+	{
+		if(size == 0) return;
+		Node* temp = head;
+		head = head->next;
+		delete temp;
+		size--;
+	}
+	void popBack()
+	{
+		if(size == 0) return;
+
+		if(size == 1)
 		{
-			next = next->next;
+			delete head;
+			head = nullptr;
+			size = 0;
+			return;
 		}
 
-		next->next = new Node(element);
-	}
-	T popFront()
-	{
-		// to implement
-	}
-	T popBack()
-	{
-		// to implement
+		Node* node = &getNode(size - 2);
+		node->next = nullptr;
+		delete node->next;
+		size--;
 	}
 	unsigned getSize() const
 	{
-		return 0;
+		return size;
 	}
 	bool isEmpty() const
 	{
-		return true;
+		return size == 0;
 	}
 	void clear()
 	{
-		// to implement
+		while(!isEmpty())
+		{
+			popFront();
+		}
 	}
 
 	T& operator[](unsigned index)
 	{
-		Node* next = head;
-		for(unsigned a = 0; a < index; a++)
-		{
-			next = head->next;
-		}
+		return getNode(index).value;
+	}
 
-		return next->value;
+	~LinkedList()
+	{
+		clear();
 	}
 
 private:
@@ -75,5 +99,17 @@ private:
 		: value{value} {}
 	};
 
+	Node& getNode(unsigned index)
+	{
+		Node* next = head;
+		for(unsigned a = 0; a < index; a++)
+		{
+			next = next->next;
+		}
+
+		return *next;
+	}
+
 	Node* head = nullptr;
+	unsigned size = 0;
 };
