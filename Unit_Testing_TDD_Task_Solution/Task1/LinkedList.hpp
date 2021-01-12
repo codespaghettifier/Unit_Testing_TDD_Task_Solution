@@ -15,6 +15,7 @@ public:
 	{
 		Node* temp = head;
 		head = new Node(element);
+		head->next = temp;
 	}
 	void pushBack(const T& element)
 	{
@@ -32,21 +33,21 @@ public:
 
 		next->next = new Node(element);
 	}
-	[[nodiscard]]  T popFront()
+	T popFront()
 	{
 		// to implement
 	}
-	[[nodiscard]]  T popBack()
+	T popBack()
 	{
 		// to implement
 	}
-	[[nodiscard]] unsigned getSize() const
+	unsigned getSize() const
 	{
-		// to implement
+		return 0;
 	}
-	[[nodiscard]] bool isEmpty() const
+	bool isEmpty() const
 	{
-		// to implement
+		return true;
 	}
 	void clear()
 	{

@@ -19,62 +19,47 @@ TEST(LinkedList, pushBack)
     ASSERT_TRUE(list[1] == 43);
 }
 
-
-/*
- * #pragma once
-
-#include <initializer_list>
-
-template<typename T>
-class LinkedList
+TEST(LinkedList, LinkedListInitializerList)
 {
-public:
-	LinkedList()
-	{
-		// to implement
-	}
-	LinkedList(const std::initializer_list<T>& newValues)
-	{
-		// to implement
-	}
-	void pushFront(const T& newValue)
-	{
-		// to implement
-	}
-	void pushBack(const T& newValue)
-	{
-		// to implement
-	}
-	[[nodiscard]]  T popFront()
-	{
-		// to implement
-	}
-	[[nodiscard]]  T popBack()
-	{
-		// to implement
-	}
-	[[nodiscard]] unsigned getSize() const
-	{
-		// to implement
-	}
-	[[nodiscard]] bool isEmpty() const
-	{
-		// to implement
-	}
-	void clear()
-	{
-		// to implement
-	}
+    LinkedList<int> list {1, 2, 42};
+    ASSERT_TRUE(list[0] == 1);
+    ASSERT_TRUE(list[1] == 2);
+    ASSERT_TRUE(list[2] == 42);
+}
 
-private:
-	Node* head;
-	struct Node
-	{
-		Node(const T& newValue) : value{ newValue } {}
-		Node* next = nullptr;
-		T value;
-	};
+TEST(LinkedList, popFront)
+{
+    LinkedList<int> list {1, 2, 42};
+    list.popFront();
+    list.popFront();
+    ASSERT_TRUE(list[0] == 42);
+}
 
-};
- *
- */
+TEST(LinkedList, popBack)
+{
+    LinkedList<int> list {1};
+    list.popBack();
+    list.pushBack(42);
+    ASSERT_TRUE(list[0] == 42);
+}
+
+TEST(LinkedList, getSize)
+{
+    LinkedList<int> list {1, 2, 42};
+    ASSERT_TRUE(list.getSize() == 3);
+}
+
+TEST(LinkedList, isEmpty)
+{
+    LinkedList<int> list;
+    ASSERT_TRUE(list.isEmpty());
+    list.pushBack(42);
+    ASSERT_TRUE(!list.isEmpty());
+}
+
+TEST(LinkedList, clear)
+{
+    LinkedList<int> list {1, 2, 42};
+    list.clear();
+    ASSERT_TRUE(list.getSize() == 0);
+}
