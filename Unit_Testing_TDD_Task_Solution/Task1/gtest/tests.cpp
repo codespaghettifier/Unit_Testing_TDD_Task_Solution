@@ -1,12 +1,20 @@
 #include "gtest/gtest.h"
 #include "../LinkedList.hpp"
 
-
 TEST(LinkedList, pushFront)
 {
     LinkedList<int> list;
     list.pushFront(43);
     list.pushFront(42);
+    ASSERT_TRUE(list[0] == 42);
+    ASSERT_TRUE(list[1] == 43);
+}
+
+TEST(LinkedList, pushBack)
+{
+    LinkedList<int> list;
+    list.pushBack(42);
+    list.pushBack(43);
     ASSERT_TRUE(list[0] == 42);
     ASSERT_TRUE(list[1] == 43);
 }

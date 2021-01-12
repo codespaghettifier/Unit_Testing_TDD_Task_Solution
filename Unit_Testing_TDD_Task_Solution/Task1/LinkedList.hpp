@@ -6,22 +6,31 @@ template<typename T>
 class LinkedList
 {
 public:
-	LinkedList()
+	LinkedList() = default;
+	LinkedList(const std::initializer_list<T>& elements)
 	{
-		// to implement
-	}
-	LinkedList(const std::initializer_list<T>& newValues)
-	{
-		// to implement
+
 	}
 	void pushFront(const T& element)
 	{
 		Node* temp = head;
 		head = new Node(element);
 	}
-	void pushBack(const T& newValue)
+	void pushBack(const T& element)
 	{
-		// to implement
+		if(head == nullptr)
+		{
+			head = new Node(element);
+			return;
+		}
+
+		Node* next = head;
+		while(next->next != nullptr)
+		{
+			next = next->next;
+		}
+
+		next->next = new Node(element);
 	}
 	[[nodiscard]]  T popFront()
 	{
@@ -65,5 +74,5 @@ private:
 		: value{value} {}
 	};
 
-	Node* head;
+	Node* head = nullptr;
 };
