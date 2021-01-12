@@ -16,28 +16,6 @@ public:
     virtual ~MockDatabaseWrapper();
 };
 
-/*
-class DatabaseWrapperPlaceholder : public DatabaseWrapper
-{
-public:
-	DatabaseWrapperPlaceholder() {}
-
-	void connect(std::string hostname, std::string hostaddr, std::string username, std::string dbname, std::string password) {}
-	void disconnect() {}
-	std::string executeNonTransactionalQuery(std::string query)
-	{
-		return string("");
-	}
-	std::string executeTransactionalQuery(std::string query)
-	{
-		return string("");
-	}
-	void commit(){}
-
-	~DatabaseWrapperPlaceholder() {}
-};
-*/
-
 TEST(UserActions, actions)
 {
 	auto databaseMock = std::make_unique<MockDatabaseWrapper>();
